@@ -1,11 +1,12 @@
 # BREADTH-FIRST-SEARCH
-<h1>ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
-<h3>Name:  </h3>
-<h3>Register Number: </h3>
-<H3>Aim:</H3>
-<p>To Implement Breadth First Search Traversal of a Graph using Python 3.</p>
-<h3>Theory:</h3>
-<p>Breadth-First Traversal (or Search) for a graph is like the Breadth-First Traversal of a tree.
+## ExpNo 3 : Implement Breadth First Search Traversal of a Graph</h1> 
+### Name: HALIMA HARISHA A
+### Register Number: 212224040094
+## Aim:
+To Implement Breadth First Search Traversal of a Graph using Python 3.
+
+## Theory:
+Breadth-First Traversal (or Search) for a graph is like the Breadth-First Traversal of a tree.
 The only catch here is that, unlike trees, graphs may contain cycles so that we may come to the same node again. To avoid processing a node more than once, we divide the vertices into two categories:
 <ol><li>Visited</li>
 <li>Not Visited</li></ol>
@@ -16,8 +17,8 @@ The only catch here is that, unlike trees, graphs may contain cycles so that we 
 To do this, a queue is used. All the adjacent unvisited nodes of the current level are pushed into the queue, and the current-level nodes are marked visited and popped from the queue.
 Illustration:
 Let us understand the working of the algorithm with the help of the following example.
+
 Step1: Initially queue and visited arrays are empty.
-</p>
 
 ![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8acdebf8-ecc2-4d10-a208-45cce441f059)
 
@@ -54,10 +55,8 @@ As we can see that every neighbours of node 4 are visited, so move to the next n
 Remove node 4 from the front of queue and visit the unvisited neighbours and push them into queue.
 Now, Queue becomes empty, So, terminate these process of iteration.
 
+## Algorithm:
 
-<hr>
-<h2>Algorithm:</h2>
-<hr>
 <ol>
   <li>Construct a Graph with Nodes and Edges</li>
  <li>Breadth First Uses Queue and iterates through the Queue for Traversal.</li>
@@ -68,9 +67,8 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 
 </ol>
 
-<hr>
-<h3>Sample Input</h3>
-<hr>
+## Sample Input:
+
 7 9 <BR>
 A B <BR>
 A C <BR>
@@ -81,16 +79,14 @@ C D <BR>
 D E <BR>
 D G <BR>
 G F <BR>
-<hr>
-<h3>Sample Output</h3>
-<hr>
+
+## Sample Output:
+
 ['A', 'B', 'C', 'F', 'E', 'D', 'G']
 
-<hr>
 
-<hr>
-<h3>Sample Input</h3>
-<hr>
+## Sample Input:
+```
 5 6 <BR>
 0 1 <BR>
 0 2 <BR>
@@ -98,14 +94,65 @@ G F <BR>
 1 3 <BR>
 2 4 <BR>
 3 4 <BR>
-<hr>
-<h3>Sample Output</h3>
-<hr>
+```
+## Sample Output:
+
 ['0', '1', '2', '3', '4']
-<hr>
-<h3>Result:</h3>
-<hr>
-<p>Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.</p>
+
+## Program:
+```
+from collections import deque, defaultdict
+
+def bfs(graph, start, visited, path):
+    queue = deque()
+    visited[start] = True
+    queue.append(start)
+    path.append(start)
+
+    while queue:
+        node = queue.popleft()
+
+        for neighbour in graph[node]:
+            if not visited[neighbour]:
+                visited[neighbour] = True
+                queue.append(neighbour)
+                path.append(neighbour)
+
+    return path
+
+
+graph = defaultdict(list)
+
+v, e = map(int, input("Enter the number of nodes and edges: ").split())
+
+print("\nEnter the edges (Adjacent Nodes):")
+
+for i in range(e):
+    u, w = input(f"Edge {i+1} (u v): ").split()
+    graph[u].append(w)
+    graph[w].append(u)
+
+print("\nAdjacency List:")
+for node in graph:
+    print(node, "->", graph[node])
+
+start = input("\nEnter the start node for BFS: ")
+
+if start not in graph:
+    print("Invalid start node!")
+else:
+    visited = defaultdict(bool)
+    path = []
+
+    traversedpath = bfs(graph, start, visited, path)
+    print("\nBFS Traversal:", " -> ".join(traversedpath))
+```
+## Output:
+<img width="461" height="450" alt="image" src="https://github.com/user-attachments/assets/9692d5be-ff08-4a23-a6b5-2c6f2a81b029" />
+
+## Result:
+
+Thus,a Graph was constructed and implementation of Breadth First Search for the same graph was done successfully.
 
 
 
